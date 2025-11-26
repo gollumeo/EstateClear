@@ -40,4 +40,19 @@ public class CreateEstateFlowTests
         await Assert.ThrowsAnyAsync<Exception>(action);
         Assert.Empty(estates.AddedEstates);
     }
+
+    [Fact]
+    public async Task AnEmptyExecutorIdShouldBeRejected()
+    {
+        var executorId = Guid.Empty;
+        var displayName = "Estate Alpha";
+        var input = new CreateEstate(executorId, displayName);
+        var estates = new EstatesFake();
+        var flow = new CreateEstateFlow(estates);
+
+        var action = () => flow.Execute(input);
+
+        await Assert.ThrowsAnyAsync<Exception>(action);
+        Assert.Empty(estates.AddedEstates);
+    }
 }

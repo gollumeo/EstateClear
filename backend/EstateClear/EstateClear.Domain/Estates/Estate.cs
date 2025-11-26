@@ -25,6 +25,11 @@ public class Estate
             throw new DomainException("Executor is required");
         }
 
+        if (executorId.Value == Guid.Empty)
+        {
+            throw new DomainException("Executor is required");
+        }
+
         if (string.IsNullOrWhiteSpace(displayName))
         {
             throw new DomainException("Display name is required");
