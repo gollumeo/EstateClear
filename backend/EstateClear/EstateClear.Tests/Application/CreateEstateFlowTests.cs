@@ -23,7 +23,7 @@ public class CreateEstateFlowTests
         Assert.NotEqual(Guid.Empty, result.EstateId.Value);
         Assert.Single(estates.AddedEstates);
         Assert.Equal(executorId, estates.AddedEstates.Single().ExecutorId.Value);
-        Assert.Equal(displayName, estates.AddedEstates.Single().DisplayName);
+        Assert.Equal("Estate Alpha", estates.AddedEstates.Single().DisplayName);
     }
 
     [Fact]

@@ -26,7 +26,7 @@ public class EstateDisplayNameTests
 
         var estate = Estate.Create(estateId, executorId, displayName);
 
-        Assert.Equal("Estate Alpha", estate.DisplayName);
+        Assert.Equal("Estate Alpha", estate.DisplayName.Value);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class EstateDisplayNameTests
 
         var estate = Estate.Create(estateId, executorId, displayName);
 
-        Assert.Equal("Estate Alpha", estate.DisplayName);
+        Assert.Equal("Estate Alpha", estate.DisplayName.Value);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class EstateDisplayNameTests
         var estate1 = Estate.Create(estateId1, executorId, displayName);
         var estate2 = Estate.Create(estateId2, executorId, displayName);
 
-        Assert.Equal(estate1.DisplayName, estate2.DisplayName);
+        Assert.Equal(estate1.DisplayName.Value, estate2.DisplayName.Value);
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class EstateDisplayNameTests
         var estate1 = Estate.Create(estateId1, executorId, rawName1);
         var estate2 = Estate.Create(estateId2, executorId, rawName2);
 
-        Assert.Equal(estate1.DisplayName, estate2.DisplayName);
+        Assert.Equal(estate1.DisplayName.Value, estate2.DisplayName.Value);
     }
 
     [Fact]
@@ -88,9 +88,22 @@ public class EstateDisplayNameTests
         var rawName1 = "estate alpha";
         var rawName2 = "  Estate   Alpha  ";
 
-        var normalized1 = Estate.NormalizeName(rawName1);
-        var normalized2 = Estate.NormalizeName(rawName2);
+        var normalized1 = EstateName.From(rawName1);
+        var normalized2 = EstateName.From(rawName2);
 
-        Assert.Equal(normalized1, normalized2);
+        Assert.Equal(normalized1.Value, normalized2.Value);
+    }
+
+    [Fact]
+    public void AnEstateNameShouldBeAFirstClassDomainValue()
+    {
+        var raw1 = "  eSTaTe   alpha ";
+        var raw2 = "ESTATE ALPHA";
+
+        var normalized1 = EstateName.From(raw1);
+        var normalized2 = EstateName.From(raw2);
+
+        Assert.Equal(normalized1.Value, normalized2.Value);
+        Assert.Equal(normalized1.Value, normalized2.Value);
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Estate
 {
-    private Estate(EstateId id, ExecutorId executorId, string displayName)
+    private Estate(EstateId id, ExecutorId executorId, EstateName displayName)
     {
         Id = id;
         ExecutorId = executorId;
@@ -16,7 +16,7 @@ public class Estate
 
     public ExecutorId ExecutorId { get; }
 
-    public string DisplayName { get; }
+    public EstateName DisplayName { get; }
 
     public EstateStatus Status { get; }
 
@@ -32,53 +32,8 @@ public class Estate
             throw new DomainException("Executor is required");
         }
 
-        if (string.IsNullOrWhiteSpace(displayName))
-        {
-            throw new DomainException("Display name is required");
-        }
+        var estateName = EstateName.From(displayName);
 
-        var trimmedDisplayName = displayName.Trim();
-
-        if (trimmedDisplayName.Length < 2)
-        {
-            throw new DomainException("Display name is too short");
-        }
-
-        var normalizedDisplayName = string.Join(
-            " ",
-            trimmedDisplayName
-                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
-                .Select(word =>
-                {
-                    var lower = word.ToLowerInvariant();
-                    return char.ToUpperInvariant(lower[0]) + lower[1..];
-                }));
-
-        return new Estate(id, executorId, normalizedDisplayName);
-    }
-
-    public static string NormalizeName(string displayName)
-    {
-        if (string.IsNullOrWhiteSpace(displayName))
-        {
-            throw new DomainException("Display name is required");
-        }
-
-        var trimmedDisplayName = displayName.Trim();
-
-        if (trimmedDisplayName.Length < 2)
-        {
-            throw new DomainException("Display name is too short");
-        }
-
-        return string.Join(
-            " ",
-            trimmedDisplayName
-                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
-                .Select(word =>
-                {
-                    var lower = word.ToLowerInvariant();
-                    return char.ToUpperInvariant(lower[0]) + lower[1..];
-                }));
+        return new Estate(id, executorId, estateName);
     }
 }
