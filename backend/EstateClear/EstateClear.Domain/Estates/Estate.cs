@@ -1,5 +1,7 @@
 namespace EstateClear.Domain.Estates;
 
+using System.Linq;
+
 public class Estate
 {
     private Estate(EstateId id, ExecutorId executorId, string displayName)
@@ -42,6 +44,16 @@ public class Estate
             throw new DomainException("Display name is too short");
         }
 
-        return new Estate(id, executorId, trimmedDisplayName);
+        var normalizedDisplayName = string.Join(
+            " ",
+            trimmedDisplayName
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                .Select(word =>
+                {
+                    var lower = word.ToLowerInvariant();
+                    return char.ToUpperInvariant(lower[0]) + lower[1..];
+                }));
+
+        return new Estate(id, executorId, normalizedDisplayName);
     }
 }

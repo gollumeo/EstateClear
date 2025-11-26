@@ -40,4 +40,30 @@ public class EstateDisplayNameTests
 
         Assert.ThrowsAny<Exception>(action);
     }
+
+    [Fact]
+    public void AnEstateNameShouldNormalizeItself()
+    {
+        var estateId = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var displayName = "  eSTaTe   ALpha  ";
+
+        var estate = Estate.Create(estateId, executorId, displayName);
+
+        Assert.Equal("Estate Alpha", estate.DisplayName);
+    }
+
+    [Fact]
+    public void NormalizingTheSameEstateNameTwiceShouldProduceIdenticalResults()
+    {
+        var estateId1 = EstateId.From(Guid.NewGuid());
+        var estateId2 = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var displayName = "  eSTaTe   ALpha  ";
+
+        var estate1 = Estate.Create(estateId1, executorId, displayName);
+        var estate2 = Estate.Create(estateId2, executorId, displayName);
+
+        Assert.Equal(estate1.DisplayName, estate2.DisplayName);
+    }
 }
