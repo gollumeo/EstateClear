@@ -66,4 +66,19 @@ public class EstateDisplayNameTests
 
         Assert.Equal(estate1.DisplayName, estate2.DisplayName);
     }
+
+    [Fact]
+    public void AnEstateNameShouldBehaveAsAValue()
+    {
+        var estateId1 = EstateId.From(Guid.NewGuid());
+        var estateId2 = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var rawName1 = "estate alpha";
+        var rawName2 = "  Estate   Alpha  ";
+
+        var estate1 = Estate.Create(estateId1, executorId, rawName1);
+        var estate2 = Estate.Create(estateId2, executorId, rawName2);
+
+        Assert.Equal(estate1.DisplayName, estate2.DisplayName);
+    }
 }
