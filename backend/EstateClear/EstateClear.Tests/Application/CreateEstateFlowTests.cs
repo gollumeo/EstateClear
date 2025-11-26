@@ -25,4 +25,19 @@ public class CreateEstateFlowTests
         Assert.Equal(executorId, estates.AddedEstates.Single().ExecutorId.Value);
         Assert.Equal(displayName, estates.AddedEstates.Single().DisplayName);
     }
+
+    [Fact]
+    public async Task AnEmptyDisplayNameShouldBeRejected()
+    {
+        var executorId = Guid.NewGuid();
+        var displayName = "   ";
+        var input = new CreateEstate(executorId, displayName);
+        var estates = new EstatesFake();
+        var flow = new CreateEstateFlow(estates);
+
+        var action = () => flow.Execute(input);
+
+        await Assert.ThrowsAnyAsync<Exception>(action);
+        Assert.Empty(estates.AddedEstates);
+    }
 }
