@@ -1,6 +1,8 @@
 using System.Reflection;
 using EstateClear.Domain;
 using EstateClear.Domain.Estates;
+using EstateClear.Domain.Estates.Entities;
+using EstateClear.Domain.Estates.ValueObjects;
 using Xunit;
 
 namespace EstateClear.Tests.Domain;
@@ -15,7 +17,7 @@ public class EstateRenameRulesTests
         var estate = Estate.Create(estateId, executorId, EstateName.From("Estate Alpha"));
 
         typeof(Estate)
-            .GetField("<Status>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetField("_status", BindingFlags.Instance | BindingFlags.NonPublic)
             ?.SetValue(estate, EstateStatus.Closed);
 
         var action = () => estate.RenameTo(EstateName.From("Estate Beta"));
@@ -32,6 +34,6 @@ public class EstateRenameRulesTests
 
         estate.RenameTo(EstateName.From("Estate Beta"));
 
-        Assert.Equal("Estate Beta", estate.DisplayName.Value());
+        Assert.Equal("Estate Beta", estate.DisplayName().Value());
     }
 }

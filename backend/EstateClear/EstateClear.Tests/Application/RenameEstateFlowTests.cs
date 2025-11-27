@@ -35,7 +35,7 @@ public class RenameEstateFlowTests
         var aggregate = Estate.Create(estateId, executorId, EstateName.From("Estate Alpha"));
         aggregate
             .GetType()
-            .GetField("<Status>k__BackingField", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+            .GetField("_status", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
             ?.SetValue(aggregate, EstateStatus.Closed);
         var input = new RenameEstate(estateId, "Estate Beta");
         var estates = new EstatesFake

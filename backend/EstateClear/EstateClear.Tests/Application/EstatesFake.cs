@@ -22,9 +22,15 @@ public class EstatesFake : IEstates
 
     public Task<bool> ExistsWithName(ExecutorId executorId, EstateName estateName)
     {
-        var exists = AddedEstates.Any(e =>
+        var existsInAdded = AddedEstates.Any(e =>
             e.ExecutorId.Value() == executorId.Value() &&
             EstateName.From(e.DisplayName).Value() == estateName.Value());
+
+        var existsInLoaded = EstatesById.Values.Any(e =>
+            e.ExecutorId.Value() == executorId.Value() &&
+            e.DisplayName().Value() == estateName.Value());
+
+        var exists = existsInAdded || existsInLoaded;
 
         return Task.FromResult(exists);
     }
@@ -37,12 +43,12 @@ public class EstatesFake : IEstates
 
     public Task<ExecutorId> Executor(EstateId estateId)
     {
-        var match = AddedEstates.FirstOrDefault(e => e.EstateId == estateId);
-        if (match == default)
+        if (EstatesById.TryGetValue(estateId, out var estate))
         {
-            return Task.FromResult(ExecutorId.From(Guid.Empty));
+            return Task.FromResult(estate.ExecutorId);
         }
 
+        var match = AddedEstates.First(e => e.EstateId == estateId);
         return Task.FromResult(match.ExecutorId);
     }
 
