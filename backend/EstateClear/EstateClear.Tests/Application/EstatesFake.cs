@@ -11,6 +11,7 @@ public class EstatesFake : IEstates
     public List<(EstateId EstateId, ExecutorId ExecutorId, string DisplayName)> AddedEstates { get; } = new();
     public List<(EstateId EstateId, EstateName NewName)> RenamedEstates { get; } = new();
     public Estate? LoadedEstate { get; set; }
+    public Dictionary<EstateId, Estate> EstatesById { get; } = new();
     public List<Estate> SavedEstates { get; } = new();
 
     public Task Add(EstateId estateId, ExecutorId executorId, string displayName)
@@ -48,6 +49,11 @@ public class EstatesFake : IEstates
 
     public Task<Estate?> Load(EstateId estateId)
     {
+        if (EstatesById.TryGetValue(estateId, out var estate))
+        {
+            return Task.FromResult<Estate?>(estate);
+        }
+
         return Task.FromResult(LoadedEstate);
     }
 

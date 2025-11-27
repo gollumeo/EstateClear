@@ -70,4 +70,27 @@ public class RenameEstateFlowTests
         Assert.Empty(estates.SavedEstates);
         Assert.Empty(estates.RenamedEstates);
     }
+
+    [Fact]
+    public async Task RenamingOneEstateShouldNotAffectAnotherEstateOfSameExecutor()
+    {
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var estateAId = EstateId.From(Guid.NewGuid());
+        var estateBId = EstateId.From(Guid.NewGuid());
+        var estateA = Estate.Create(estateAId, executorId, EstateName.From("Estate Alpha"));
+        var estateB = Estate.Create(estateBId, executorId, EstateName.From("Estate Beta"));
+        var input = new RenameEstate(estateAId, "Estate Alpha Prime");
+        var estates = new EstatesFake();
+        estates.EstatesById[estateAId] = estateA;
+        estates.EstatesById[estateBId] = estateB;
+        var flow = new RenameEstateFlow(estates);
+
+        var result = await flow.Execute(input);
+
+        Assert.NotNull(result);
+        Assert.Single(estates.SavedEstates);
+        Assert.Equal("Estate Alpha Prime", estates.SavedEstates[0].DisplayName().Value());
+        Assert.Equal("Estate Beta", estates.EstatesById[estateBId].DisplayName().Value());
+        Assert.Empty(estates.RenamedEstates);
+    }
 }
