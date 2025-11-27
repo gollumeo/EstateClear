@@ -37,7 +37,12 @@ public class EstatesFake : IEstates
 
     public Task<ExecutorId> Executor(EstateId estateId)
     {
-        var match = AddedEstates.First(e => e.EstateId == estateId);
+        var match = AddedEstates.FirstOrDefault(e => e.EstateId == estateId);
+        if (match == default)
+        {
+            return Task.FromResult(ExecutorId.From(Guid.Empty));
+        }
+
         return Task.FromResult(match.ExecutorId);
     }
 

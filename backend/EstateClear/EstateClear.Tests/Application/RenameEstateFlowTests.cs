@@ -93,4 +93,27 @@ public class RenameEstateFlowTests
         Assert.Equal("Estate Beta", estates.EstatesById[estateBId].DisplayName().Value());
         Assert.Empty(estates.RenamedEstates);
     }
+
+    [Fact]
+    public async Task RenamingEstateShouldRejectDuplicateNameForSameExecutor()
+    {
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var estateAId = EstateId.From(Guid.NewGuid());
+        var estateBId = EstateId.From(Guid.NewGuid());
+        var estateA = Estate.Create(estateAId, executorId, EstateName.From("Estate Alpha"));
+        var estateB = Estate.Create(estateBId, executorId, EstateName.From("Estate Beta"));
+        var input = new RenameEstate(estateAId, "Estate Beta");
+        var estates = new EstatesFake();
+        estates.EstatesById[estateAId] = estateA;
+        estates.EstatesById[estateBId] = estateB;
+        var flow = new RenameEstateFlow(estates);
+
+        var action = () => flow.Execute(input);
+
+        await Assert.ThrowsAnyAsync<Exception>(action);
+        Assert.Empty(estates.SavedEstates);
+        Assert.Empty(estates.RenamedEstates);
+        Assert.Equal("Estate Beta", estates.EstatesById[estateBId].DisplayName().Value());
+        Assert.Equal("Estate Alpha", estates.EstatesById[estateAId].DisplayName().Value());
+    }
 }

@@ -19,6 +19,14 @@ public sealed class RenameEstateFlow(IEstates estates)
             return new EstateRenamed(input.EstateId);
         }
 
+        var executorId = await estates.Executor(input.EstateId);
+        var exists = await estates.ExistsWithName(executorId, newName);
+
+        if (exists && estate.DisplayName().Value() != newName.Value())
+        {
+            throw new Exception("Estate name already exists for executor");
+        }
+
         estate.RenameTo(newName);
 
         await estates.Save(estate);
