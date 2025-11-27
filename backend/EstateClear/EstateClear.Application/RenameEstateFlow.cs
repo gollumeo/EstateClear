@@ -6,23 +6,17 @@ public sealed class RenameEstateFlow(IEstates estates)
 {
     public async Task<EstateRenamed> Execute(RenameEstate input)
     {
-        var executorId = await estates.Executor(input.EstateId);
-        var currentName = await estates.NameOf(input.EstateId);
+        var estate = await estates.Load(input.EstateId);
+        if (estate is null)
+        {
+            throw new Exception("Estate not found");
+        }
+
         var newName = EstateName.From(input.NewName);
 
-        if (newName == currentName)
-        {
-            return new EstateRenamed(input.EstateId);
-        }
+        estate.RenameTo(newName);
 
-        var exists = await estates.ExistsWithName(executorId, newName);
-
-        if (exists)
-        {
-            throw new Exception("Estate name already exists for executor");
-        }
-
-        await estates.Rename(input.EstateId, newName);
+        await estates.Save(estate);
 
         return new EstateRenamed(input.EstateId);
     }

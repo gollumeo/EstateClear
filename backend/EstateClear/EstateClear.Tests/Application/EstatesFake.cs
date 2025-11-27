@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using EstateClear.Application;
+using EstateClear.Domain.Estates.Entities;
 using EstateClear.Domain.Estates.ValueObjects;
 
 namespace EstateClear.Tests.Application;
@@ -7,6 +10,8 @@ public class EstatesFake : IEstates
 {
     public List<(EstateId EstateId, ExecutorId ExecutorId, string DisplayName)> AddedEstates { get; } = new();
     public List<(EstateId EstateId, EstateName NewName)> RenamedEstates { get; } = new();
+    public Estate? LoadedEstate { get; set; }
+    public List<Estate> SavedEstates { get; } = new();
 
     public Task Add(EstateId estateId, ExecutorId executorId, string displayName)
     {
@@ -39,5 +44,16 @@ public class EstatesFake : IEstates
     {
         var match = AddedEstates.First(e => e.EstateId == estateId);
         return Task.FromResult(EstateName.From(match.DisplayName));
+    }
+
+    public Task<Estate?> Load(EstateId estateId)
+    {
+        return Task.FromResult(LoadedEstate);
+    }
+
+    public Task Save(Estate estate)
+    {
+        SavedEstates.Add(estate);
+        return Task.CompletedTask;
     }
 }

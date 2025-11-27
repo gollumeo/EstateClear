@@ -1,4 +1,5 @@
 using EstateClear.Domain.Estates.ValueObjects;
+using EstateClear.Domain.Estates.Entities;
 
 namespace EstateClear.Application;
 
@@ -13,4 +14,8 @@ public interface IEstates
     Task<ExecutorId> Executor(EstateId estateId);
 
     Task<EstateName> NameOf(EstateId estateId);
+
+    Task<Estate?> Load(EstateId estateId);
+
+    Task Save(Estate estate);
 }
