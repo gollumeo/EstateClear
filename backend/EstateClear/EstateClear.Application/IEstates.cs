@@ -6,5 +6,5 @@ public interface IEstates
 {
     Task Add(EstateId estateId, ExecutorId executorId, string displayName);
 
-    Task<bool> ExistsWithName(ExecutorId executorId, string displayName);
+    Task<bool> ExistsWithName(ExecutorId executorId, EstateName estateName);
 }

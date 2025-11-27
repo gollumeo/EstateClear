@@ -74,4 +74,21 @@ public class CreateEstateFlowTests
         await Assert.ThrowsAnyAsync<Exception>(action);
         Assert.Single(estates.AddedEstates);
     }
+
+    [Fact]
+    public async Task CreatingEstateWithEquivalentNormalizedNameShouldBeRejected()
+    {
+        var executorId = Guid.NewGuid();
+        var existingEstateId = EstateId.From(Guid.NewGuid());
+        var existingName = "  eStATe   aLPha ";
+        var input = new CreateEstate(executorId, "ESTATE ALPHA");
+        var estates = new EstatesFake();
+        estates.AddedEstates.Add((existingEstateId, ExecutorId.From(executorId), existingName));
+        var flow = new CreateEstateFlow(estates);
+
+        var action = () => flow.Execute(input);
+
+        await Assert.ThrowsAnyAsync<Exception>(action);
+        Assert.Single(estates.AddedEstates);
+    }
 }

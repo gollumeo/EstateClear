@@ -16,11 +16,11 @@ public class EstatesFake : IEstates
         return Task.CompletedTask;
     }
 
-    public Task<bool> ExistsWithName(ExecutorId executorId, string displayName)
+    public Task<bool> ExistsWithName(ExecutorId executorId, EstateName estateName)
     {
         var exists = AddedEstates.Any(e =>
             e.ExecutorId.Value() == executorId.Value() &&
-            e.DisplayName == displayName);
+            EstateName.From(e.DisplayName).Value() == estateName.Value());
 
         return Task.FromResult(exists);
     }
