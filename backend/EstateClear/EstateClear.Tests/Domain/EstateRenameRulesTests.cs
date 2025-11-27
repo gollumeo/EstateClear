@@ -36,4 +36,22 @@ public class EstateRenameRulesTests
 
         Assert.Equal("Estate Beta", estate.DisplayName().Value());
     }
+
+    [Fact]
+    public void RenamingEstateShouldBeForbiddenWhenParticipantsExist()
+    {
+        var estateId = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var estate = Estate.Create(estateId, executorId, EstateName.From("Estate Alpha"));
+
+        estate
+            .GetType()
+            .GetField("_participantsCount", BindingFlags.Instance | BindingFlags.NonPublic)
+            ?.SetValue(estate, 1);
+
+        var action = () => estate.RenameTo(EstateName.From("Estate Beta"));
+
+        Assert.Throws<DomainException>(action);
+        Assert.Equal("Estate Alpha", estate.DisplayName().Value());
+    }
 }

@@ -9,10 +9,12 @@ public class Estate
         Id = id;
         ExecutorId = executorId;
         _displayName = displayName;
-        Status = EstateStatus.Active;
+        _status = EstateStatus.Active;
     }
 
     private EstateName _displayName;
+    private EstateStatus _status;
+    private int _participantsCount;
 
     public EstateId Id { get; }
 
@@ -20,13 +22,18 @@ public class Estate
 
     public EstateName DisplayName() => _displayName;
 
-    public EstateStatus Status { get; private set; }
+    public EstateStatus Status => _status;
 
     public void RenameTo(EstateName newName)
     {
-        if (Status == EstateStatus.Closed)
+        if (_status == EstateStatus.Closed)
         {
             throw new DomainException("Estate is closed");
+        }
+
+        if (_participantsCount > 0)
+        {
+            throw new DomainException("Estate has participants");
         }
 
         _displayName = newName;
@@ -34,7 +41,7 @@ public class Estate
 
     public void Close()
     {
-        Status = EstateStatus.Closed;
+        _status = EstateStatus.Closed;
     }
 
     public static Estate Create(EstateId id, ExecutorId executorId, EstateName estateName)
