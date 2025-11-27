@@ -13,6 +13,35 @@ public sealed class EstateName
 
     public string Value() => _value;
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is not EstateName other)
+        {
+            return false;
+        }
+
+        return Value() == other.Value();
+    }
+
+    public override int GetHashCode() => Value().GetHashCode();
+
+    public static bool operator ==(EstateName? left, EstateName? right)
+    {
+        if (ReferenceEquals(left, right))
+        {
+            return true;
+        }
+
+        if (left is null || right is null)
+        {
+            return false;
+        }
+
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(EstateName? left, EstateName? right) => !(left == right);
+
     public static EstateName From(string displayName)
     {
         if (string.IsNullOrWhiteSpace(displayName))
