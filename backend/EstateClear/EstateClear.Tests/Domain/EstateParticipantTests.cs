@@ -330,4 +330,79 @@ public class EstateParticipantTests
         enumerator = participants.GetEnumerator();
         Assert.False(enumerator.MoveNext());
     }
+
+    [Fact]
+    public void ParticipantWithContributionsCannotBeRevoked()
+    {
+        var estateId = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var estate = Estate.Create(estateId, executorId, EstateName.From("Estate Alpha"));
+
+        var participantType = typeof(Estate)
+            .Assembly
+            .GetTypes()
+            .FirstOrDefault(t => t.Name == "Participant");
+        Assert.NotNull(participantType);
+
+        var participantFrom = participantType!.GetMethod("From", BindingFlags.Public | BindingFlags.Static);
+        Assert.NotNull(participantFrom);
+
+        var participant = participantFrom!.Invoke(null, new object?[] { "jane.doe@example.com", "Jane", "Doe" });
+        Assert.NotNull(participant);
+
+        var executorType = typeof(Estate)
+            .Assembly
+            .GetTypes()
+            .FirstOrDefault(t => t.Name == "Executor");
+        Assert.NotNull(executorType);
+
+        var executorFrom = executorType!.GetMethod("From", BindingFlags.Public | BindingFlags.Static);
+        Assert.NotNull(executorFrom);
+
+        var executor = executorFrom!.Invoke(null, new object?[] { executorId.Value() });
+        Assert.NotNull(executor);
+
+        var participantsField = estate
+            .GetType()
+            .GetField("_participants", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        Assert.NotNull(participantsField);
+
+        var participants = participantsField!.GetValue(estate) as IList;
+        Assert.NotNull(participants);
+
+        participants!.Add(participant);
+
+        var contributionsField = estate
+            .GetType()
+            .GetField("_contributions", BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.NotNull(contributionsField);
+
+        var contributions = contributionsField!.GetValue(estate) as IList;
+        Assert.NotNull(contributions);
+
+        contributions!.Add("dummy");
+
+        var revokeMethod = estate
+            .GetType()
+            .GetMethod("RevokeParticipantAccess", BindingFlags.Instance | BindingFlags.Public, null, new[] { participantType, executorType }, null);
+
+        Assert.NotNull(revokeMethod);
+
+        Assert.Throws<DomainException>(() =>
+        {
+            try
+            {
+                revokeMethod!.Invoke(estate, new[] { participant, executor });
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException ?? ex;
+            }
+        });
+
+        var enumerator = participants.GetEnumerator();
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(participant, enumerator.Current);
+    }
 }

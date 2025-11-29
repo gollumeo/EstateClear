@@ -1,3 +1,4 @@
+using System.Collections;
 using EstateClear.Domain.Estates.ValueObjects;
 
 namespace EstateClear.Domain.Estates.Entities;
@@ -16,6 +17,7 @@ public class Estate
     private EstateStatus _status;
     private int _participantsCount;
     private readonly List<Participant> _participants = new();
+    private readonly IList _contributions = new ArrayList();
 
     public EstateId Id { get; }
 
@@ -66,6 +68,11 @@ public class Estate
         if (executor.Value() != ExecutorId.Value())
         {
             throw new DomainException("Executor is required");
+        }
+
+        if (_contributions.Count > 0)
+        {
+            throw new DomainException("Cannot revoke participant with contributions");
         }
 
         var removed = _participants.Remove(participant);
