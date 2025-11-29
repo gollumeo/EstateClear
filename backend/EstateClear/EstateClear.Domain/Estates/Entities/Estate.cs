@@ -61,6 +61,7 @@ public class Estate
 
     public void Close()
     {
+        _participantsCount = 0;
         _status = EstateStatus.Closed;
     }
 
