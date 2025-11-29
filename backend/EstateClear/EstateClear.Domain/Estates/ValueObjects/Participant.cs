@@ -1,17 +1,10 @@
 namespace EstateClear.Domain.Estates.ValueObjects;
 
-public sealed class Participant : IEquatable<Participant>
+public sealed class Participant(string email, string? firstName, string? lastName) : IEquatable<Participant>
 {
-    private readonly string _email;
-    private readonly string? _firstName;
-    private readonly string? _lastName;
-
-    private Participant(string email, string? firstName, string? lastName)
-    {
-        _email = email;
-        _firstName = firstName;
-        _lastName = lastName;
-    }
+    private readonly string _email = email;
+    private readonly string? _firstName = firstName;
+    private readonly string? _lastName = lastName;
 
     public static Participant From(string email, string? firstName, string? lastName)
     {

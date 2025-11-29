@@ -1,13 +1,8 @@
 namespace EstateClear.Domain.Estates.ValueObjects;
 
-public sealed class Executor : IEquatable<Executor>
+public sealed class Executor(Guid value) : IEquatable<Executor>
 {
-    private readonly Guid _value;
-
-    private Executor(Guid value)
-    {
-        _value = value;
-    }
+    private readonly Guid _value = value;
 
     public static Executor From(Guid value) => new(value);
 

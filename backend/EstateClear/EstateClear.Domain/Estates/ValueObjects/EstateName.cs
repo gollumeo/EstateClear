@@ -1,13 +1,8 @@
 namespace EstateClear.Domain.Estates.ValueObjects;
 
-public sealed class EstateName
+public sealed class EstateName(string value)
 {
-    private EstateName(string value)
-    {
-        _value = value;
-    }
-
-    private string _value { get; }
+    private string _value { get; } = value;
 
     public string Value() => _value;
 
