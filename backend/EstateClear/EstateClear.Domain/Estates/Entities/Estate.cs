@@ -31,6 +31,11 @@ public class Estate
 
     public void RemoveParticipant()
     {
+        if (_participantsCount == 0)
+        {
+            return;
+        }
+
         _participantsCount--;
     }
 
