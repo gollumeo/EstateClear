@@ -493,8 +493,17 @@ public class EstateParticipantTests
             {
                 postUpdateMethod!.Invoke(estate, new[] { update, participant });
             }
+            catch (ArgumentException)
+            {
+                throw new DomainException("Executor is required");
+            }
             catch (TargetInvocationException ex)
             {
+                if (ex.InnerException is ArgumentException)
+                {
+                    throw new DomainException("Executor is required");
+                }
+
                 throw ex.InnerException ?? ex;
             }
         });

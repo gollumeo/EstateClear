@@ -10,6 +10,8 @@ public sealed class RevokeParticipantAccessFlow(IEstates estates)
             throw new Exception("Estate not found");
         }
 
-        throw new NotImplementedException();
+        estate.RevokeParticipantAccess(input.Participant, input.Executor);
+
+        await estates.Save(estate);
     }
 }

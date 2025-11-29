@@ -18,6 +18,7 @@ public class Estate
     private int _participantsCount;
     private readonly List<Participant> _participants = new();
     private readonly IList _contributions = new ArrayList();
+    private readonly IList _updates = new ArrayList();
 
     public EstateId Id { get; }
 
@@ -81,6 +82,21 @@ public class Estate
         {
             throw new DomainException("Participant not found");
         }
+    }
+
+    public void PostUpdate(Update update, Executor executor)
+    {
+        if (_status == EstateStatus.Closed)
+        {
+            throw new DomainException("Estate is closed");
+        }
+
+        if (executor.Value() != ExecutorId.Value())
+        {
+            throw new DomainException("Executor is required");
+        }
+
+        _updates.Add(update);
     }
 
     public void RemoveParticipant()

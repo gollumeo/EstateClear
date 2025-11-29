@@ -10,6 +10,8 @@ public sealed class GrantParticipantAccessFlow(IEstates estates)
             throw new Exception("Estate not found");
         }
 
-        throw new NotImplementedException();
+        estate.GrantParticipantAccess(input.Participant, input.Executor);
+
+        await estates.Save(estate);
     }
 }
