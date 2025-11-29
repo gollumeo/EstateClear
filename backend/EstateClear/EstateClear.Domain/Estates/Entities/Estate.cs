@@ -43,6 +43,39 @@ public class Estate
         _participants.Add(participant);
     }
 
+    public void GrantParticipantAccess(Participant participant, Executor executor)
+    {
+        if (executor.Value() != ExecutorId.Value())
+        {
+            throw new DomainException("Executor is required");
+        }
+
+        foreach (var existing in _participants)
+        {
+            if (existing.Equals(participant))
+            {
+                throw new DomainException("Participant already exists");
+            }
+        }
+
+        _participants.Add(participant);
+    }
+
+    public void RevokeParticipantAccess(Participant participant, Executor executor)
+    {
+        if (executor.Value() != ExecutorId.Value())
+        {
+            throw new DomainException("Executor is required");
+        }
+
+        var removed = _participants.Remove(participant);
+
+        if (!removed)
+        {
+            throw new DomainException("Participant not found");
+        }
+    }
+
     public void RemoveParticipant()
     {
         if (_status == EstateStatus.Closed)
