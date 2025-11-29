@@ -405,4 +405,98 @@ public class EstateParticipantTests
         Assert.True(enumerator.MoveNext());
         Assert.Equal(participant, enumerator.Current);
     }
+
+    [Fact]
+    public void ParticipantWithUpdateMustRespectPostingRules()
+    {
+        var estateId = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var estate = Estate.Create(estateId, executorId, EstateName.From("Estate Alpha"));
+
+        var updateType = typeof(Estate)
+            .Assembly
+            .GetTypes()
+            .FirstOrDefault(t => t.Name == "Update");
+        Assert.NotNull(updateType);
+
+        var updateFrom = updateType!.GetMethod("From", BindingFlags.Public | BindingFlags.Static);
+        Assert.NotNull(updateFrom);
+
+        var update = updateFrom!.Invoke(null, new object?[] { "First update" });
+        Assert.NotNull(update);
+
+        var executorType = typeof(Estate)
+            .Assembly
+            .GetTypes()
+            .FirstOrDefault(t => t.Name == "Executor");
+        Assert.NotNull(executorType);
+
+        var executorFrom = executorType!.GetMethod("From", BindingFlags.Public | BindingFlags.Static);
+        Assert.NotNull(executorFrom);
+
+        var executor = executorFrom!.Invoke(null, new object?[] { executorId.Value() });
+        Assert.NotNull(executor);
+
+        var postUpdateMethod = estate
+            .GetType()
+            .GetMethod("PostUpdate", BindingFlags.Instance | BindingFlags.Public, null, new[] { updateType, executorType }, null);
+
+        Assert.NotNull(postUpdateMethod);
+
+        postUpdateMethod!.Invoke(estate, new[] { update, executor });
+
+        var updatesField = estate
+            .GetType()
+            .GetField("_updates", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        Assert.NotNull(updatesField);
+
+        var updates = updatesField!.GetValue(estate) as IEnumerable;
+        Assert.NotNull(updates);
+
+        var enumerator = updates!.GetEnumerator();
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(update, enumerator.Current);
+
+        estate
+            .GetType()
+            .GetField("_status", BindingFlags.Instance | BindingFlags.NonPublic)
+            ?.SetValue(estate, EstateStatus.Closed);
+
+        Assert.Throws<DomainException>(() =>
+        {
+            try
+            {
+                postUpdateMethod!.Invoke(estate, new[] { update, executor });
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException ?? ex;
+            }
+        });
+
+        var participantType = typeof(Estate)
+            .Assembly
+            .GetTypes()
+            .FirstOrDefault(t => t.Name == "Participant");
+        Assert.NotNull(participantType);
+
+        var participantFrom = participantType!.GetMethod("From", BindingFlags.Public | BindingFlags.Static);
+        Assert.NotNull(participantFrom);
+
+        var participant = participantFrom!.Invoke(null, new object?[] { "jane.doe@example.com", "Jane", "Doe" });
+        Assert.NotNull(participant);
+
+        Assert.Throws<DomainException>(() =>
+        {
+            try
+            {
+                postUpdateMethod!.Invoke(estate, new[] { update, participant });
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException ?? ex;
+            }
+        });
+    }
 }
