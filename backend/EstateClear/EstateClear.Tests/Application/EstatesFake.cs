@@ -8,7 +8,7 @@ public class EstatesFake : IEstates
 {
     public List<(EstateId EstateId, ExecutorId ExecutorId, string DisplayName)> AddedEstates { get; } = new();
     public List<(EstateId EstateId, EstateName NewName)> RenamedEstates { get; } = new();
-    public Estate? LoadedEstate { get; set; }
+    public Estate? LoadedEstate { get; init; }
     public Dictionary<EstateId, Estate> EstatesById { get; } = new();
     public List<Estate> SavedEstates { get; } = new();
 
