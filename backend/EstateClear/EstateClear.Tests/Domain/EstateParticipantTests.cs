@@ -168,7 +168,7 @@ public class EstateParticipantTests
         Assert.True(enumerator.MoveNext());
         Assert.Equal(participant, enumerator.Current);
 
-        var duplicate = fromMethod!.Invoke(null, new object?[] { "john.doe@example.com", "Johnny", "Doe" });
+        var duplicate = fromMethod!.Invoke(null, ["john.doe@example.com", "Johnny", "Doe"]);
         Assert.NotNull(duplicate);
 
         var equalsMethod = participant!.GetType().GetMethod("Equals", BindingFlags.Instance | BindingFlags.Public, null, new[] { participantType }, null);
