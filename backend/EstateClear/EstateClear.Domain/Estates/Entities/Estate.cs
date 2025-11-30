@@ -5,16 +5,17 @@ namespace EstateClear.Domain.Estates.Entities;
 
 public class Estate
 {
-    private Estate(EstateId id, ExecutorId executorId, EstateName displayName)
+    private Estate(EstateId id, Executor executor, EstateName displayName)
     {
         Id = id;
-        ExecutorId = executorId;
+        _executor = executor;
         _displayName = displayName;
         _status = EstateStatus.Active;
     }
 
     private EstateName _displayName;
     private EstateStatus _status;
+    private Executor _executor;
     private int _participantsCount;
     private readonly List<Participant> _participants = new();
     private readonly IList _contributions = new ArrayList();
@@ -22,7 +23,7 @@ public class Estate
 
     public EstateId Id { get; }
 
-    public ExecutorId ExecutorId { get; }
+    public ExecutorId ExecutorId => ExecutorId.From(_executor.Id);
 
     public EstateName DisplayName() => _displayName;
 
@@ -48,7 +49,7 @@ public class Estate
 
     public void GrantParticipantAccess(Participant participant, Executor executor)
     {
-        if (executor.Value() != ExecutorId.Value())
+        if (!executor.IsSame(_executor.Id))
         {
             throw new DomainException("Executor is required");
         }
@@ -63,7 +64,7 @@ public class Estate
 
     public void RevokeParticipantAccess(Participant participant, Executor executor)
     {
-        if (executor.Value() != ExecutorId.Value())
+        if (!executor.IsSame(_executor.Id))
         {
             throw new DomainException("Executor is required");
         }
@@ -88,7 +89,7 @@ public class Estate
             throw new DomainException("Estate is closed");
         }
 
-        if (executor.Value() != ExecutorId.Value())
+        if (!executor.IsSame(_executor.Id))
         {
             throw new DomainException("Executor is required");
         }
@@ -144,6 +145,8 @@ public class Estate
             throw new DomainException("Executor is required");
         }
 
-        return new Estate(id, executorId, estateName);
+        var executor = Executor.From(executorId.Value());
+
+        return new Estate(id, executor, estateName);
     }
 }
