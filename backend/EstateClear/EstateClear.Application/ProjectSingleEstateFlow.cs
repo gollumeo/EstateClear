@@ -1,10 +1,11 @@
-using System.Threading.Tasks;
+
+using EstateClear.Application.DTOs;
 
 namespace EstateClear.Application;
 
 public sealed class ProjectSingleEstateFlow(IEstates estates)
 {
-    public async Task<DTOs.SingleEstateProjection?> Execute(ProjectSingleEstate input)
+    public async Task<SingleEstateProjection?> Execute(ProjectSingleEstate input)
     {
         var estate = await estates.Load(input.EstateId);
 
@@ -13,7 +14,7 @@ public sealed class ProjectSingleEstateFlow(IEstates estates)
             return null;
         }
 
-        return new DTOs.SingleEstateProjection(
+        return new SingleEstateProjection(
             estate.Id.Value(),
             estate.ExecutorId.Value(),
             estate.DisplayName().Value(),
