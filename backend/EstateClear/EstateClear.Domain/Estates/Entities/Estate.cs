@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using EstateClear.Domain.Estates.ValueObjects;
 
 namespace EstateClear.Domain.Estates.Entities;
@@ -28,6 +29,8 @@ public class Estate
     public EstateName DisplayName() => _displayName;
 
     public EstateStatus Status => _status;
+
+    public IReadOnlyList<Participant> Participants() => _participants.AsReadOnly();
 
     public void AddParticipant()
     {

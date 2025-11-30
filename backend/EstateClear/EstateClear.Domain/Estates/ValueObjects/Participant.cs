@@ -6,6 +6,12 @@ public sealed class Participant(string email, string? firstName, string? lastNam
     private readonly string? _firstName = firstName;
     private readonly string? _lastName = lastName;
 
+    public string Email() => _email;
+
+    public string? FirstName() => _firstName;
+
+    public string? LastName() => _lastName;
+
     public static Participant From(string email, string? firstName, string? lastName)
     {
         return new Participant(email, firstName, lastName);

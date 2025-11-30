@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EstateClear.Domain.Estates.ValueObjects;
 using EstateClear.Domain.Estates.Entities;
 
@@ -18,4 +19,6 @@ public interface IEstates
     Task<Estate?> Load(EstateId estateId);
 
     Task Save(Estate estate);
+
+    Task<IReadOnlyList<Estate>> ByExecutor(ExecutorId executorId);
 }

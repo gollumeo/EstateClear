@@ -73,4 +73,15 @@ public class EstatesFake : IEstates
         SavedEstates.Add(estate);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<Estate>> ByExecutor(ExecutorId executorId)
+    {
+        var matches = EstatesById
+            .Values
+            .Where(e => e.ExecutorId.Equals(executorId))
+            .ToList()
+            .AsReadOnly();
+
+        return Task.FromResult<IReadOnlyList<Estate>>(matches);
+    }
 }
