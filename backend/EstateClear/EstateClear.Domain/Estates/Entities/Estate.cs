@@ -10,11 +10,10 @@ public class Estate
         Id = id;
         _executor = executor;
         _displayName = displayName;
-        _status = EstateStatus.Active;
+        Status = EstateStatus.Active;
     }
 
     private EstateName _displayName;
-    private EstateStatus _status;
     private readonly Executor _executor;
     private readonly List<Participant> _participants = [];
     private readonly IList _contributions = new ArrayList();
@@ -26,7 +25,7 @@ public class Estate
 
     public EstateName DisplayName() => _displayName;
 
-    public EstateStatus Status => _status;
+    public EstateStatus Status { get; private set; }
 
     public IReadOnlyList<Participant> Participants() => _participants.AsReadOnly();
 
@@ -67,7 +66,7 @@ public class Estate
 
     public void PostUpdate(Update update, Executor executor)
     {
-        if (_status == EstateStatus.Closed)
+        if (Status == EstateStatus.Closed)
         {
             throw new DomainException("Estate is closed");
         }
@@ -82,7 +81,7 @@ public class Estate
 
     public void RenameTo(EstateName newName)
     {
-        if (_status == EstateStatus.Closed)
+        if (Status == EstateStatus.Closed)
         {
             throw new DomainException("Estate is closed");
         }
@@ -98,7 +97,7 @@ public class Estate
     public void Close()
     {
         _participants.Clear();
-        _status = EstateStatus.Closed;
+        Status = EstateStatus.Closed;
     }
 
     public static Estate Create(EstateId id, ExecutorId executorId, EstateName estateName)
