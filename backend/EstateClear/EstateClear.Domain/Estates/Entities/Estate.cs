@@ -86,7 +86,7 @@ public class Estate
             throw new DomainException("Estate is closed");
         }
 
-        if (_participants.Any())
+        if (_participants.Count != 0)
         {
             throw new DomainException("Estate has participants");
         }
