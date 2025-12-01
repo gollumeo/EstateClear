@@ -112,4 +112,15 @@ public class Estate
 
         return new Estate(id, executor, estateName);
     }
+
+    internal static Estate FromPersistence(EstateId id, ExecutorId executorId, EstateName name, EstateStatus status)
+    {
+        var executor = Executor.From(executorId.Value());
+        var estate = new Estate(id, executor, name)
+        {
+            _status = status
+        };
+
+        return estate;
+    }
 }

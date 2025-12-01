@@ -11,7 +11,7 @@ namespace EstateClear.Tests.Persistence;
 public class EstatesRepositoryEfTests
 {
     [Fact]
-    public async Task Save_ShouldPersistEstate_And_LoadReturnsDomainEntity()
+    public async Task SaveShouldPersistEstateAndLoadReturnsDomainEntity()
     {
         using var connection = new SqliteConnection("Filename=:memory:");
         connection.Open();
@@ -43,7 +43,7 @@ public class EstatesRepositoryEfTests
     }
 
     [Fact]
-    public async Task ByExecutor_ShouldReturnOnlyMatchingEstates()
+    public async Task ByExecutorShouldReturnOnlyMatchingEstates()
     {
         using var connection = new SqliteConnection("Filename=:memory:");
         connection.Open();
