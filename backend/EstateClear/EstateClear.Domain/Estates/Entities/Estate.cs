@@ -30,6 +30,13 @@ public class Estate
 
     public IReadOnlyList<Participant> Participants() => _participants.AsReadOnly();
 
+    public Participant AddPendingParticipant(string email)
+    {
+        var participant = Participant.From(email, null, null, ParticipantStatus.Pending);
+        _participants.Add(participant);
+        return participant;
+    }
+
     public void GrantParticipantAccess(Participant participant, Executor executor)
     {
         if (!executor.IsSame(_executor.Id))

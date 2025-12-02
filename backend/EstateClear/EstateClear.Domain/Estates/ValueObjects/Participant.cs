@@ -1,10 +1,23 @@
 namespace EstateClear.Domain.Estates.ValueObjects;
 
-public sealed class Participant(string email, string? firstName, string? lastName) : IEquatable<Participant>
+public sealed class Participant : IEquatable<Participant>
 {
-    private readonly string _email = email;
-    private readonly string? _firstName = firstName;
-    private readonly string? _lastName = lastName;
+    private readonly string _email;
+    private readonly string? _firstName;
+    private readonly string? _lastName;
+
+    private Participant(ParticipantId id, string email, string? firstName, string? lastName, ParticipantStatus status)
+    {
+        Id = id;
+        _email = email.Trim().ToLowerInvariant();
+        _firstName = firstName;
+        _lastName = lastName;
+        Status = status;
+    }
+
+    public ParticipantId Id { get; }
+
+    public ParticipantStatus Status { get; }
 
     public string Email() => _email;
 
@@ -12,9 +25,10 @@ public sealed class Participant(string email, string? firstName, string? lastNam
 
     public string? LastName() => _lastName;
 
-    public static Participant From(string email, string? firstName, string? lastName)
+    public static Participant From(string email, string? firstName, string? lastName, ParticipantStatus status = ParticipantStatus.Active)
     {
-        return new Participant(email, firstName, lastName);
+        var id = ParticipantId.From(Guid.NewGuid());
+        return new Participant(id, email, firstName, lastName, status);
     }
 
     public bool Equals(Participant? other)
