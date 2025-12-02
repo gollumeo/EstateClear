@@ -30,4 +30,21 @@ public class AcceptInvitationFlowTests
         Assert.NotNull(result);
         Assert.Equal(participant.Id.Value(), result.ParticipantId.Value());
     }
+
+    [Fact]
+    public async Task AcceptInvitationWithInvalidTokenShouldThrow()
+    {
+        var estateId = EstateId.From(Guid.NewGuid());
+        var executorId = ExecutorId.From(Guid.NewGuid());
+        var estate = Estate.Create(estateId, executorId, EstateName.From("Estate Beta"));
+        estate.AddPendingParticipant("user@example.com");
+        var token = InvitationToken.From(Guid.NewGuid().ToString());
+        var estates = new EstatesFake();
+        estates.EstatesById[estateId] = estate;
+        var invitations = new ParticipantInvitationsFake();
+        var input = new AcceptInvitation(token.Value());
+        var flow = new AcceptInvitationFlow(estates, invitations);
+
+        await Assert.ThrowsAnyAsync<Exception>(() => flow.Execute(input));
+    }
 }
