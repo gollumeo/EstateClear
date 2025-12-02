@@ -32,7 +32,7 @@ public class Estate
 
     public Participant AddPendingParticipant(string email)
     {
-        var participant = Participant.From(email, null, null, ParticipantStatus.Pending);
+        var participant = Participant.Pending(email);
         _participants.Add(participant);
         return participant;
     }

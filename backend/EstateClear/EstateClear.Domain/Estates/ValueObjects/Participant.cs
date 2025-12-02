@@ -31,6 +31,12 @@ public sealed class Participant : IEquatable<Participant>
         return new Participant(id, email, firstName, lastName, status);
     }
 
+    public static Participant Pending(string email)
+    {
+        var id = ParticipantId.From(Guid.NewGuid());
+        return new Participant(id, email, null, null, ParticipantStatus.Pending);
+    }
+
     public bool Equals(Participant? other)
     {
         if (other is null)
