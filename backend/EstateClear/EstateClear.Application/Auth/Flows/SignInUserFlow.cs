@@ -1,4 +1,4 @@
-using EstateClear.Application.Auth.Inputs;
+using EstateClear.Application.Auth.Commands;
 using EstateClear.Application.Auth.Ports;
 using EstateClear.Domain.Auth.ValueObjects;
 

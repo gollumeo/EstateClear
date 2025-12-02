@@ -1,4 +1,4 @@
-using EstateClear.Application;
+using EstateClear.Application.Estates.Ports;
 using EstateClear.Domain.Estates.Entities;
 using EstateClear.Domain.Estates.ValueObjects;
 

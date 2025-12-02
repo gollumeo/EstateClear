@@ -13,5 +13,7 @@ public sealed class EstateClearDbContext(DbContextOptions<EstateClearDbContext> 
     {
         modelBuilder.ApplyConfiguration(new UserRecordConfiguration());
         modelBuilder.ApplyConfiguration(new EstateRecordConfiguration());
+        modelBuilder.Entity<UserRecord>().Property(ci => ci.Email).HasMaxLength(256);
+        modelBuilder.Entity<UserRecord>().Property(ci => ci.PasswordHash).HasMaxLength(256);
     }
 }
