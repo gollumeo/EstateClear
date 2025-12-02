@@ -37,6 +37,11 @@ public sealed class Participant : IEquatable<Participant>
         return new Participant(id, email, null, null, ParticipantStatus.Pending);
     }
 
+    public Participant Activate()
+    {
+        return new Participant(Id, _email, _firstName, _lastName, ParticipantStatus.Active);
+    }
+
     public bool Equals(Participant? other)
     {
         if (other is null)

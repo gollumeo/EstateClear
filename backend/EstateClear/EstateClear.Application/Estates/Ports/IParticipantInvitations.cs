@@ -4,5 +4,11 @@ namespace EstateClear.Application.Estates.Ports;
 
 public interface IParticipantInvitations
 {
-    Task Store(InvitationToken token, ParticipantId participantId);
+    Task Store(InvitationToken token, ParticipantId participantId, EstateId estateId);
+
+    Task<InvitationLookup?> FindByToken(InvitationToken token);
+
+    Task Remove(InvitationToken token);
 }
+
+public sealed record InvitationLookup(ParticipantId ParticipantId, EstateId EstateId);

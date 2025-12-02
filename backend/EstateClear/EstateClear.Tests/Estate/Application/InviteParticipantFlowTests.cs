@@ -33,14 +33,3 @@ public class InviteParticipantFlowTests
         Assert.Equal(result.InvitationToken.Value(), invitations.StoredInvitations.Single().Token.Value());
     }
 }
-
-public class ParticipantInvitationsFake : IParticipantInvitations
-{
-    public List<(InvitationToken Token, ParticipantId ParticipantId)> StoredInvitations { get; } = new();
-
-    public Task Store(InvitationToken token, ParticipantId participantId)
-    {
-        StoredInvitations.Add((token, participantId));
-        return Task.CompletedTask;
-    }
-}

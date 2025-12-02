@@ -37,6 +37,15 @@ public class Estate
         return participant;
     }
 
+    public Participant ActivateParticipant(ParticipantId id)
+    {
+        var existing = _participants.First(p => p.Id.Equals(id));
+        var activated = existing.Activate();
+        var index = _participants.IndexOf(existing);
+        _participants[index] = activated;
+        return activated;
+    }
+
     public void GrantParticipantAccess(Participant participant, Executor executor)
     {
         if (!executor.IsSame(_executor.Id))

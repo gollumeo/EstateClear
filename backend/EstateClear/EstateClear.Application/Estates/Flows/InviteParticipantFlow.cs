@@ -18,7 +18,7 @@ public sealed class InviteParticipantFlow(IEstates estates, IParticipantInvitati
         var participant = estate.AddPendingParticipant(input.Email);
         var token = InvitationToken.From(Guid.NewGuid().ToString());
 
-        await invitations.Store(token, participant.Id);
+        await invitations.Store(token, participant.Id, estate.Id);
         await estates.Save(estate);
 
         return new InviteParticipantResult(participant.Id, token);
