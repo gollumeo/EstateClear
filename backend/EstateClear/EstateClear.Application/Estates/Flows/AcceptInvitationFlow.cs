@@ -21,7 +21,22 @@ public sealed class AcceptInvitationFlow(IEstates estates, IParticipantInvitatio
             throw new Exception("Estate not found");
         }
 
-        var participant = estate.ActivateParticipant(lookup.ParticipantId);
+        if (!estate.Participants().Any(p => p.Id.Equals(lookup.ParticipantId)))
+        {
+            throw new Exception("Participant not in estate");
+        }
+
+        var participant = estate.Participants().First(p => p.Id.Equals(lookup.ParticipantId));
+        if (participant.Status != ParticipantStatus.Pending)
+        {
+            throw new Exception("Invalid participant status");
+        }
+        if (participant.Status == ParticipantStatus.Active)
+        {
+            throw new Exception("Participant already active");
+        }
+
+        participant = estate.ActivateParticipant(lookup.ParticipantId);
 
         await invitations.Remove(token);
         await estates.Save(estate);
