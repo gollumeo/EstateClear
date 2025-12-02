@@ -1,9 +1,9 @@
+using EstateClear.Application.Auth.Commands;
 using EstateClear.Application.Auth.Flows;
-using EstateClear.Application.Auth.Inputs;
 using EstateClear.Domain.Auth.ValueObjects;
 using EstateClear.Tests.Auth.Fakes;
 
-namespace EstateClear.Tests.Auth;
+namespace EstateClear.Tests.Auth.Application;
 
 public class SignInUserFlowTests
 {
@@ -22,6 +22,24 @@ public class SignInUserFlowTests
 
         Assert.NotNull(result);
         Assert.Equal(userId.Value(), result.UserId.Value());
+    }
+
+    [Fact]
+    public async Task SignInShouldReturnSessionToken()
+    {
+        var email = Email.From("user@example.com");
+        var passwordHash = PasswordHash.From("hashed-password");
+        var users = new UsersFake();
+        var userId = UserId.From(Guid.NewGuid());
+        users.ExistingUsers[email] = (userId, passwordHash);
+        var input = new SignInUser("user@example.com", "hashed-password");
+        var flow = new SignInUserFlow(users);
+
+        var result = await flow.Execute(input);
+
+        Assert.NotNull(result);
+        Assert.Equal(userId.Value(), result.UserId.Value());
+        Assert.False(string.IsNullOrEmpty(result.SessionToken.Value()));
     }
 
     [Fact]

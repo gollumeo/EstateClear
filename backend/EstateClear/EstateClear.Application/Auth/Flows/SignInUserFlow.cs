@@ -23,11 +23,15 @@ public sealed class SignInUserFlow(IUsers users)
             throw new Exception("Invalid credentials");
         }
 
-        return new SignedInUser(user.Id);
+        var sessionToken = SessionToken.From(Guid.NewGuid().ToString());
+
+        return new SignedInUser(user.Id, sessionToken);
     }
 }
 
-public sealed class SignedInUser(UserId userId)
+public sealed class SignedInUser(UserId userId, SessionToken sessionToken)
 {
     public UserId UserId { get; } = userId;
+
+    public SessionToken SessionToken { get; } = sessionToken;
 }
