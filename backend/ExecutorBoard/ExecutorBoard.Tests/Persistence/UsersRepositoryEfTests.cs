@@ -11,7 +11,7 @@ namespace ExecutorBoard.Tests.Persistence;
 public class UsersRepositoryEfTests
 {
     [Fact]
-    public async Task Add_ShouldPersist_And_FindByEmail_ReturnsUser()
+    public async Task AddShouldPersistAndFindByEmailReturnsUser()
     {
         using var connection = new SqliteConnection("Filename=:memory:");
         connection.Open();
@@ -39,7 +39,7 @@ public class UsersRepositoryEfTests
     }
 
     [Fact]
-    public async Task ExistsByEmail_ShouldReturnTrue_WhenExists()
+    public async Task ExistsByEmailShouldReturnTrueWhenExists()
     {
         using var connection = new SqliteConnection("Filename=:memory:");
         connection.Open();
@@ -65,7 +65,7 @@ public class UsersRepositoryEfTests
     }
 
     [Fact]
-    public async Task FindByEmail_ShouldReturnNull_WhenMissing()
+    public async Task FindByEmailShouldReturnNullWhenMissing()
     {
         using var connection = new SqliteConnection("Filename=:memory:");
         connection.Open();
