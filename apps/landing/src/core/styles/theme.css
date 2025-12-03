@@ -1,1 +1,36 @@
-/* Tailwind v4 theme placeholder (Sprint 2). */
+/* Local fonts: ExecutorSerif (Cormorant Garamond 600) and ExecutorSans (Manrope 400), both SIL OFL and stored locally to avoid remote fetches. */
+@font-face {
+  font-family: 'ExecutorSerif';
+  src: url('./fonts/ExecutorSerif.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ExecutorSans';
+  src: url('./fonts/ExecutorSans.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-anthracite: #1A1A1A;
+  --color-ivory: #F7F5EF;
+  --color-gold-quiet: #CBA04C;
+  --color-navy-trust: #0E1A2B;
+  --color-gray-soft: #E4E4E7;
+
+  --font-serif: "ExecutorSerif", serif;
+  --font-sans: "ExecutorSans", sans-serif;
+
+  --text-xl: 2.5rem;
+  --text-lg: 1.75rem;
+  --text-md: 1.25rem;
+  --text-base: 1rem;
+
+  --radius-soft: 0.5rem;
+
+  /* Spacing scale can be extended later by adding --spacing-* tokens here to keep layout rhythm aligned without touching components. */
+}
