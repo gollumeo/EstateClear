@@ -2,6 +2,7 @@
   <main class="bg-ivory">
     <HeroSection />
     <HowItWorks />
+    <WhyItMatters />
 
     <section class="section">
       <div class="container space-y-6">
@@ -23,4 +24,5 @@
 <script setup lang="ts">
 import HeroSection from '../modules/hero/HeroSection.vue';
 import HowItWorks from '../modules/howitworks/HowItWorks.vue';
+import WhyItMatters from "../modules/why/WhyItMatters.vue";
 </script>
