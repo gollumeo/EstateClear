@@ -1,63 +1,65 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "./theme.css";
 
 @layer base {
-  body {
-    @apply bg-ivory text-anthracite font-sans;
-  }
+    body {
+        @apply bg-ivory text-anthracite font-sans;
+    }
+}
+
+@layer utilities {
+    .btn {
+        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition;
+    }
 }
 
 @layer components {
-  .container {
-    @apply mx-auto max-w-screen-lg px-4;
-  }
 
-  .section {
-    @apply py-12 md:py-20;
-  }
+    .container {
+        @apply mx-auto max-w-screen-lg px-4;
+    }
 
-  .heading-xl {
-    @apply font-serif text-xl font-semibold text-anthracite;
-  }
+    .section {
+        @apply py-12 md:py-20;
+    }
 
-  .heading-lg {
-    @apply font-serif text-lg font-semibold text-anthracite;
-  }
+    .heading-xl {
+        @apply font-serif text-xl font-semibold text-anthracite;
+    }
 
-  .heading-md {
-    @apply font-serif text-md font-medium text-anthracite;
-  }
+    .heading-lg {
+        @apply font-serif text-lg font-semibold text-anthracite;
+    }
 
-  .text-body {
-    @apply font-sans text-base leading-relaxed text-anthracite;
-  }
+    .heading-md {
+        @apply font-serif text-md font-medium text-anthracite;
+    }
 
-  .btn {
-    @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition;
-  }
+    .text-body {
+        @apply font-sans text-base leading-relaxed text-anthracite;
+    }
 
-  .btn-primary {
-    @apply btn bg-navy-trust text-ivory hover:bg-anthracite;
-  }
+    .btn-primary {
+        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition bg-navy-trust text-ivory hover:bg-anthracite;
+    }
 
-  .btn-secondary {
-    @apply btn bg-gray-soft text-anthracite hover:bg-navy-trust hover:text-ivory;
-  }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition bg-gray-soft text-anthracite hover:bg-navy-trust hover:text-ivory;
+    }
 
-  .btn-sm {
-    @apply px-3 py-1.5 text-sm;
-  }
+    .btn-sm {
+        @apply px-3 py-1.5 text-sm;
+    }
 
-  .input {
-    @apply w-full rounded-soft border border-anthracite/20 bg-white px-4 py-2 font-sans text-base text-anthracite shadow-sm transition focus:border-navy-trust focus:outline-none focus:ring-2 focus:ring-navy-trust/10;
-  }
+    .input {
+        @apply w-full rounded-soft border border-anthracite/20 bg-white px-4 py-2 font-sans text-base text-anthracite shadow-sm transition focus:border-navy-trust focus:outline-none focus:ring-2 focus:ring-navy-trust/10;
+    }
 
-  .muted {
-    @apply font-sans text-base text-anthracite/70;
-  }
+    .muted {
+        @apply font-sans text-base text-anthracite/70;
+    }
 
-  .icon-wrap {
-    @apply inline-flex h-10 w-10 items-center justify-center rounded-soft border border-anthracite/10 bg-ivory font-sans text-navy-trust;
-  }
+    .icon-wrap {
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-soft border border-anthracite/10 bg-ivory font-sans text-navy-trust;
+    }
 }
