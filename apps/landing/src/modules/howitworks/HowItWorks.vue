@@ -7,7 +7,7 @@
       </p>
     </header>
 
-    <ol class="container mt-6 md:mt-8 grid gap-8 md:grid-cols-3">
+    <ol class="container mt-6 md:mt-8 grid card-gap md:grid-cols-3">
       <li class="card space-y-3">
         <span class="icon-wrap">1</span>
         <h3 class="heading-md">Create your board</h3>

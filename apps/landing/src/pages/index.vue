@@ -1,15 +1,15 @@
 <template>
   <main class="bg-ivory">
     <HeroSection />
-    <div class="separator-gold">
+    <div class="separator-gold divider-space">
       <span class="dot"></span>
     </div>
     <HowItWorks />
-    <div class="separator-gold">
+    <div class="separator-gold divider-space">
       <span class="dot"></span>
     </div>
     <WhyItMatters />
-    <div class="separator-gold">
+    <div class="separator-gold divider-space">
       <span class="dot"></span>
     </div>
 

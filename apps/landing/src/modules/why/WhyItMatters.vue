@@ -1,11 +1,11 @@
 <template>
-  <section aria-labelledby="why-title" class="section mb-20 md:mb-32">
+  <section aria-labelledby="why-title" class="section section--why-tight mb-10 md:mb-16">
     <header class="mx-auto max-w-2xl space-y-2 text-center">
       <h2 id="why-title" class="heading-lg">Why it matters</h2>
       <p class="text-body muted">ExecutorBoard changes the entire dynamic of estate administration.</p>
     </header>
 
-    <ul class="container mt-6 md:mt-8 grid gap-10 md:grid-cols-3">
+    <ul class="container mt-6 md:mt-8 grid card-gap md:grid-cols-3">
       <li class="card space-y-3">
         <h3 class="heading-md">Less noise, more clarity</h3>
         <p class="text-body muted">

@@ -17,44 +17,59 @@
     }
 }
 
-@layer utilities {
-    .btn {
-        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition;
-    }
-}
-
 @layer components {
 
     .container {
-        @apply mx-auto max-w-screen-lg px-4;
+        @apply mx-auto max-w-screen-xl px-4;
     }
 
     .section {
-        @apply py-12 md:py-20;
+        @apply pt-10 pb-10 md:pt-16 md:pb-16;
+    }
+
+    .section--why-tight {
+        @apply pb-12 md:pb-14;
+    }
+
+    .section--why-tight + .divider-space {
+        margin-top: 0.75rem;
+    }
+
+    @screen md {
+        .section--why-tight + .divider-space {
+            margin-top: 1.25rem;
+        }
     }
 
     .heading-xl {
-        @apply font-serif text-xl font-semibold text-anthracite;
+        @apply font-serif font-semibold leading-tight text-anthracite text-[32px] md:text-[42px];
     }
 
     .heading-lg {
-        @apply font-serif text-lg font-semibold text-anthracite;
+        @apply font-serif font-semibold leading-snug text-[22px] md:text-[26px];
     }
 
     .heading-md {
-        @apply font-serif text-md font-medium text-anthracite;
+        @apply font-serif font-medium text-[17px] md:text-[18px];
     }
 
     .text-body {
-        @apply font-sans text-base leading-relaxed text-anthracite;
+        @apply font-sans text-[15px] leading-relaxed text-anthracite;
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-sm {
+        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-[15px] tracking-tight transition-colors duration-200;
     }
 
     .btn-primary {
-        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition bg-navy-trust text-ivory hover:bg-anthracite;
+        @apply bg-navy-trust text-ivory hover:bg-anthracite;
     }
 
     .btn-secondary {
-        @apply inline-flex items-center justify-center rounded-soft px-4 py-2 font-sans text-base transition bg-gray-soft text-anthracite hover:bg-navy-trust hover:text-ivory;
+        @apply bg-gray-soft text-anthracite hover:bg-navy-trust hover:text-ivory;
     }
 
     .btn-sm {
@@ -66,49 +81,56 @@
     }
 
     .muted {
-        @apply font-sans text-base text-anthracite/70;
+        @apply font-sans text-[15px] text-anthracite/70;
     }
 
-  .icon-wrap {
-    @apply inline-flex h-10 w-10 items-center justify-center rounded-soft border border-anthracite/10 bg-ivory font-sans text-navy-trust;
-  }
+    .icon-wrap {
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-soft border border-anthracite/10 bg-ivory font-sans text-navy-trust;
+    }
 
-  .card {
-    @apply rounded-soft border border-anthracite/20 bg-white p-6 shadow-lg/20 md:p-8;
-  }
+    .card {
+        @apply rounded-soft border border-anthracite/15 bg-white p-6 shadow-sm transition-shadow hover:shadow-md/20 md:p-8;
+    }
 
-  .card-glass {
-    @apply rounded-soft border border-white/30 bg-white/30 p-6 shadow-xl/20 backdrop-blur-lg md:p-8;
-  }
+    .card-glass {
+        @apply rounded-soft border border-white/25 bg-white/30 p-6 shadow-lg/10 backdrop-blur-lg md:p-8;
+    }
 
-  .separator {
-    @apply mx-auto h-px w-full bg-anthracite/10;
-  }
+    .separator {
+        @apply mx-auto h-px w-full bg-anthracite/10;
+    }
 
-  .separator-gold {
-    @apply relative mx-auto my-10 flex items-center justify-center md:my-16;
-    max-width: 580px;
-  }
+    .separator-gold {
+        @apply relative mx-auto mt-14 flex items-center justify-center w-full max-w-3xl md:mt-16 mb-1 md:mb-2;
+    }
 
-  .separator-gold::before,
-  .separator-gold::after {
-    content: "";
-    @apply block h-px flex-1 bg-anthracite/30;
-  }
+    .separator-gold::before,
+    .separator-gold::after {
+        content: "";
+        @apply block h-px flex-1 bg-anthracite/15;
+    }
 
-  .separator-gold::before {
-    @apply mr-4;
-  }
+    .separator-gold::before {
+        @apply mr-4;
+    }
 
-  .separator-gold::after {
-    @apply ml-4;
-  }
+    .separator-gold::after {
+        @apply ml-4;
+    }
 
-  .separator-gold .dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--gold, #d4a95f);
-    @apply block rounded-full;
-    box-shadow: 0 0 2px rgba(255, 255, 255, 0.25);
-  }
+    .separator-gold .dot {
+        @apply block h-2 w-2 rounded-full;
+        background-color: var(--gold-quiet, #cba04c);
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.25);
+    }
+}
+
+@layer utilities {
+    .divider-space {
+        @apply my-6 md:my-10;
+    }
+
+    .card-gap {
+        @apply gap-10 md:gap-14;
+    }
 }

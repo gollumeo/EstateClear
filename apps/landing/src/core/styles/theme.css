@@ -1,4 +1,3 @@
-/* Local fonts: ExecutorSerif (Cormorant Garamond 600) and ExecutorSans (Manrope 400), both SIL OFL and stored locally to avoid remote fetches. */
 @font-face {
   font-family: 'ExecutorSerif';
   src: url('./fonts/ExecutorSerif.woff2') format('woff2');
@@ -31,6 +30,4 @@
   --text-base: 1rem;
 
   --radius-soft: 0.5rem;
-
-  /* Spacing scale can be extended later by adding --spacing-* tokens here to keep layout rhythm aligned without touching components. */
 }
