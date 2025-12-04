@@ -1,8 +1,17 @@
 <template>
   <main class="bg-ivory">
     <HeroSection />
+    <div class="separator-gold">
+      <span class="dot"></span>
+    </div>
     <HowItWorks />
+    <div class="separator-gold">
+      <span class="dot"></span>
+    </div>
     <WhyItMatters />
+    <div class="separator-gold">
+      <span class="dot"></span>
+    </div>
 
     <section class="section">
       <div class="container space-y-6">

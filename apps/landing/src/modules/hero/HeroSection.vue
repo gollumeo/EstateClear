@@ -7,7 +7,7 @@
         <EmailCapture />
       </div>
 
-      <aside class="space-y-4 rounded-soft border border-anthracite/10 bg-white p-6 shadow-sm">
+      <aside class="card-glass space-y-4">
         <h2 class="heading-md">Executor peace of mind</h2>
         <ul class="space-y-3">
           <li class="flex items-start gap-3">
