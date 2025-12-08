@@ -7,21 +7,25 @@
 
     <ul class="container mt-6 md:mt-8 grid card-gap md:grid-cols-3">
       <li class="card card-warm card-surface space-y-3">
-        <h3 class="heading-md">Less noise, more clarity</h3>
+        <h3 class="heading-md">Clarity reduces friction</h3>
         <p class="text-body muted">
-          Executors regain control with one structured space for updates, milestones, and decisions.
+          A consistent view of the estate minimizes misunderstandings and keeps communication calm.
         </p>
       </li>
 
       <li class="card card-warm card-surface space-y-3">
-        <h3 class="heading-md">Families feel informed</h3>
-        <p class="text-body muted">No more repeated questions. Everyone stays aligned without emotional pressure.</p>
+        <h3 class="heading-md">Structure lowers the load</h3>
+        <p class="text-body muted">
+          With updates and documents grouped in one place, executors avoid repetition and maintain predictable
+          progress.
+        </p>
       </li>
 
       <li class="card card-warm card-surface space-y-3">
-        <h3 class="heading-md">Trusted by attorneys</h3>
+        <h3 class="heading-md">Transparency supports fairness</h3>
         <p class="text-body muted">
-          A calm, sovereign workflow that keeps updates traceable and communication clear.
+          Every heir receives the same information, reinforcing trust and supporting documented, equitable
+          communication.
         </p>
       </li>
     </ul>

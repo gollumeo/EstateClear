@@ -2,6 +2,7 @@
   <header class="section">
     <div class="container grid items-center gap-6 md:grid-cols-2">
       <div class="space-y-6">
+        <p class="muted uppercase tracking-wide text-sm">A private space for estate clarity</p>
         <h1 class="heading-xl">A single, orderly board for every step of the estate</h1>
         <p class="text-body">
           EstateClear consolidates updates, documents, and key decisions into one structured view, so expectations stay

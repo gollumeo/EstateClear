@@ -10,20 +10,26 @@
     <ol class="container mt-6 md:mt-8 grid card-gap md:grid-cols-3">
       <li class="card card-warm card-surface space-y-3">
         <span class="step-badge">1</span>
-        <h3 class="heading-md">Create your board</h3>
-        <p class="text-body muted">Set up your private board in seconds. No accounts for heirs required.</p>
+        <h3 class="heading-md">Private space restores order</h3>
+        <p class="text-body muted">
+          Establish a secure place where updates, documents, and next steps stay grouped without scattering.
+        </p>
       </li>
 
       <li class="card card-warm card-surface space-y-3">
         <span class="step-badge">2</span>
-        <h3 class="heading-md">Post updates once</h3>
-        <p class="text-body muted">Add milestones, notes, and documents. Everything stays in one place.</p>
+        <h3 class="heading-md">Structured records prevent drift</h3>
+        <p class="text-body muted">
+          Post milestones and notes once. Everything remains in a single, orderly reference that stays intact over time.
+        </p>
       </li>
 
       <li class="card card-warm card-surface space-y-3">
         <span class="step-badge">3</span>
-        <h3 class="heading-md">Heirs stay informed</h3>
-        <p class="text-body muted">Family checks the board — not your phone. Calm, clear communication.</p>
+        <h3 class="heading-md">Shared clarity aligns heirs</h3>
+        <p class="text-body muted">
+          Heirs consult the board for clear, consistent information, reducing repeated questions and expectations drift.
+        </p>
       </li>
     </ol>
   </section>

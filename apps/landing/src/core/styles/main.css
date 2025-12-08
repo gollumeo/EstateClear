@@ -97,6 +97,8 @@
 
     .heading-md {
         @apply font-serif font-semibold leading-snug tracking-normal text-base md:text-lg text-[#121212];
+        word-break: break-word;
+        hyphens: auto;
     }
 
     .text-body {

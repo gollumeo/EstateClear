@@ -17,11 +17,11 @@
       <section class="section">
         <div class="container max-w-5xl">
           <div class="cta-bento space-y-6">
-            <p class="cta-eyebrow">ExecutorBoard</p>
-            <h2 class="heading-lg">Quiet luxury for estate executors</h2>
+            <p class="cta-eyebrow">EXECUTORBOARD</p>
+            <h2 class="heading-lg">A structured, sovereign workspace for estate communication</h2>
             <p class="text-body">
-              A calm, sovereign workspace for attorneys and executors to keep heirs informed, decisions traceable,
-              and estates moving without friction.
+              A dedicated environment where executors and attorneys maintain clarity, document progress, and keep heirs
+              aligned without repeated outreach.
             </p>
             <div class="flex flex-wrap gap-3">
               <RouterLink class="btn btn-primary" to="/for-attorneys">Talk with our team</RouterLink>
