@@ -92,7 +92,7 @@
     }
 
     .heading-lg {
-        @apply font-serif font-semibold leading-snug tracking-wide text-[22px] md:text-3xl;
+        @apply font-serif font-semibold leading-snug tracking-wide text-2xl md:text-4xl;
     }
 
     .heading-md {
