@@ -24,9 +24,9 @@
               aligned without repeated outreach.
             </p>
             <div class="flex flex-wrap gap-3">
-              <RouterLink class="btn btn-primary" to="/for-attorneys">Talk with our team</RouterLink>
+              <RouterLink class="btn btn-primary max-md:py-3" to="/for-attorneys">Talk with our team</RouterLink>
               <RouterLink
-                class="btn btn-secondary btn-sm"
+                class="btn btn-secondary btn-sm max-md:py-3"
                 to="/guides/how-to-keep-heirs-updated"
               >
                 Read the guide
