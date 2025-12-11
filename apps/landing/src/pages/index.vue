@@ -19,7 +19,7 @@
           <div class="cta-bento space-y-6">
             <p class="cta-eyebrow">EXECUTORBOARD</p>
             <h2 class="heading-lg">A structured, sovereign workspace for estate communication</h2>
-            <p class="text-body">
+            <p class="text-body max-sm:text-[15px] max-sm:leading-relaxed">
               A dedicated environment where executors and attorneys maintain clarity, document progress, and keep heirs
               aligned without repeated outreach.
             </p>

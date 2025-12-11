@@ -24,7 +24,7 @@
     }
 
     .section {
-        @apply pt-8 pb-8 md:pt-14 md:pb-14;
+        @apply pt-8 pb-8 md:pt-14 md:pb-14 max-md:mt-10 max-md:mb-10;
     }
 
     .banner-premium {
@@ -96,9 +96,14 @@
     }
 
     .heading-md {
-        @apply font-serif font-semibold leading-snug tracking-normal text-base md:text-lg text-[#121212];
-        word-break: break-word;
-        hyphens: auto;
+        @apply font-serif font-semibold leading-snug tracking-normal text-base md:text-lg text-[#121212] max-sm:leading-snug max-sm:tracking-tight;
+    }
+
+    @media (max-width: 639px) {
+        .heading-md {
+            word-break: normal;
+            hyphens: auto;
+        }
     }
 
     .text-body {
