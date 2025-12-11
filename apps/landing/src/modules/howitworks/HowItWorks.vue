@@ -2,9 +2,7 @@
   <section aria-labelledby="how-it-works-title" class="section">
     <header class="mx-auto max-w-2xl space-y-2 text-center">
       <h2 id="how-it-works-title" class="heading-lg max-sm:text-2xl max-sm:tracking-normal max-sm:leading-snug sm:tracking-wide">How it works</h2>
-      <p class="text-body muted">
-        ExecutorBoard turns chaotic communication into a calm, structured process.
-      </p>
+      <p class="text-body muted max-md:px-6 wrap-break-word hyphens-auto">ExecutorBoard turns chaotic communication into a calm, structured process.</p>
     </header>
 
     <ol class="container mt-6 md:mt-8 grid card-gap md:gap-y-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3">

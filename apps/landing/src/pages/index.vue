@@ -13,13 +13,13 @@
       <span class="dot"></span>
     </div>
 
-    <div class="cta-bento-wrapper">
+    <section class="cta-bento-wrapper max-md:pt-8 max-md:pb-10 max-md:mb-4">
       <section class="section">
         <div class="container max-w-5xl">
           <div class="cta-bento space-y-6">
             <p class="cta-eyebrow">EXECUTORBOARD</p>
             <h2 class="heading-lg">A structured, sovereign workspace for estate communication</h2>
-            <p class="text-body max-sm:text-[15px] max-sm:leading-relaxed">
+            <p class="text-body max-sm:text-[15px] max-sm:leading-relaxed break-words hyphens-auto">
               A dedicated environment where executors and attorneys maintain clarity, document progress, and keep heirs
               aligned without repeated outreach.
             </p>
@@ -35,7 +35,7 @@
           </div>
         </div>
       </section>
-    </div>
+    </section>
   </main>
 </template>
 

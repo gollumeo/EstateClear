@@ -24,7 +24,7 @@
     }
 
     .section {
-        @apply pt-8 pb-8 md:pt-14 md:pb-14 max-md:mt-10 max-md:mb-10;
+        @apply pt-8 pb-8 md:pt-14 md:pb-14 max-md:mt-10 max-md:mb-6;
     }
 
     .banner-premium {
